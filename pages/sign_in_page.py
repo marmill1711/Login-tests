@@ -20,9 +20,23 @@ class SignInPage(PageFactory):
         "next_button": ("CSS", ".VfPpkd-LgbsSe-OWXEXe-k8QpJ > span:nth-child(4)"),
         "password_box": ("CSS", "#password > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)"),
         "try_again_button": ("CSS", "#next > div > div > a"),
-        "invalid_error": ("CSS", ".o6cuMc")
-
+        "invalid_error": ("CSS", ".o6cuMc"),
+        "languages_button": ("CSS", ".VfPpkd-O1htCb"),
+        "languages_list": ("xpath", "/html/body/div[1]/div[1]/footer/div/div/div/div[2]")
     }
+
+    def get_languages_list(self):
+        return self.languages_list
+
+    def get_language(self):
+        language_list = self.driver.find_element(By.XPATH, "/html/body/div[1]/div[1]/footer/div/div/div/div[2]")
+        language = language_list.find_elements(By.CSS_SELECTOR, "li.MCs1Pd:nth-child(2)")
+        for i in language:
+            text = i.text
+            print(text)
+
+    def click_languages_button(self):
+        self.languages_button.click()
 
     def clear_email_box(self):
         self.email_box.clear()
